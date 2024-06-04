@@ -31,13 +31,12 @@ public class EntryService {
         this.entryRepository = entryRepository;
         this.tagRepository = tagRepository;
     }
-
-    public List<Entry> getAllEntries(int pageIndex, int pageSize) {
-        return entryRepository.findAll(Sort.by("id")).page(Page.of(pageIndex, pageSize)).list();
-    }
-
     public PanacheQuery<Entry> getAllEntries(Sort sort, Page page) {
         return entryRepository.findAll(sort).page(page);
+    }
+
+    public Long getAllEntriesCount() {
+        return entryRepository.findAll().count();
     }
 
     public Optional<Entry> findById(Long entryId) {

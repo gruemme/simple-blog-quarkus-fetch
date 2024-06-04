@@ -1,6 +1,7 @@
 package com.example.simple_blog_quarkus.controller;
 
 import com.example.simple_blog_quarkus.dto.EntryInput;
+import com.example.simple_blog_quarkus.dto.PageOutput;
 import com.example.simple_blog_quarkus.model.BlogUser;
 import com.example.simple_blog_quarkus.model.Entry;
 import com.example.simple_blog_quarkus.repositories.BlogUserRepository;
@@ -51,10 +52,11 @@ public class EntryController {
         // But I did not find the getSortFromQuery, so I implemented it my self
         Page page = Page.of(pageIndex, pageSize);
         Sort sort = getSortFromQuery(sortQuery);
-        PanacheQuery<Entry> query = entryService.getAllEntries(sort, page);
-        //ist<Entry> entries = entryService.getAllEntries(pageIndex, pageSize);
-        //TODO: warp in page
-        return Response.ok(query.list()).build();
+        List<Entry> entires = entryService.getAllEntries(sort, page).list();
+        Long allEntriesCount = entryService.getAllEntriesCount();
+        PageOutput<Entry> pageOutput = PageOutput.of(entires, pageIndex, pageSize, allEntriesCount);
+
+        return Response.ok(pageOutput).build();
     }
 
     @GET
