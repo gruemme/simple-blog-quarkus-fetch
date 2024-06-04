@@ -44,6 +44,7 @@ public class EntryController {
     }
 
     @GET
+    @Transactional
     public Response getAllEntries(
             @QueryParam("sort") List<String> sortQuery,
             @QueryParam("page") @DefaultValue("0") int pageIndex,
@@ -61,6 +62,7 @@ public class EntryController {
 
     @GET
     @Path("/{entryId}")
+    @Transactional
     public Entry getEntryById(@PathParam("entryId") Long entryId) {
         return entryService.findById(entryId)
                 .orElseThrow(() -> new WebApplicationException(Response.Status.NOT_FOUND));

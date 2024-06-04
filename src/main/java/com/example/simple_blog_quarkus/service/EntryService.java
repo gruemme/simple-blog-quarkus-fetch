@@ -11,6 +11,7 @@ import io.quarkus.hibernate.orm.panache.PanacheQuery;
 import io.quarkus.panache.common.Page;
 import io.quarkus.panache.common.Sort;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.transaction.Transactional;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -31,6 +32,7 @@ public class EntryService {
         this.entryRepository = entryRepository;
         this.tagRepository = tagRepository;
     }
+
     public PanacheQuery<Entry> getAllEntries(Sort sort, Page page) {
         return entryRepository.findAll(sort).page(page);
     }

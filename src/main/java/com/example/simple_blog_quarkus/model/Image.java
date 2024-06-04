@@ -1,6 +1,7 @@
 package com.example.simple_blog_quarkus.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,6 +9,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import jakarta.persistence.OneToOne;
+
+import java.util.Base64;
 
 @Entity
 public class Image {
@@ -18,7 +21,8 @@ public class Image {
     private String contentType;
     @Lob
     @Column(nullable = false)
-    private byte[] imageContent;
+    @JsonIgnore
+    private byte[] imageContentByte;
     @OneToOne(mappedBy = "titleImage", optional = false)
     @JsonBackReference
     private Entry entry;
@@ -28,7 +32,7 @@ public class Image {
 
     public Image(String contentType, byte[] imageContent) {
         this.contentType = contentType;
-        this.imageContent = imageContent;
+        this.imageContentByte = imageContent;
     }
 
     public Long getId() {
@@ -39,8 +43,12 @@ public class Image {
         return contentType;
     }
 
-    public byte[] getImageContent() {
-        return imageContent;
+    public byte[] getImageContentByte() {
+        return imageContentByte;
+    }
+
+    public String getImageContent() {
+        return Base64.getEncoder().encodeToString(imageContentByte);
     }
 
     public Entry getEntry() {

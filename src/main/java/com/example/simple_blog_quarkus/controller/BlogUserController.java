@@ -24,7 +24,7 @@ import java.util.Optional;
 
 import static com.example.simple_blog_quarkus.util.PaginationUtil.getSortFromQuery;
 
-@Path("/user")
+@Path("/users")
 public class BlogUserController {
 
     private final BlogUserRepository blogUserRepository;
@@ -39,7 +39,7 @@ public class BlogUserController {
     @Path("me")
     @Authenticated
     @SecurityRequirement(name = "BasicAuth")
-    public BlogUser createEntry(@Context SecurityContext securityContext) {
+    public BlogUser getCurrentUser(@Context SecurityContext securityContext) {
         String username = securityContext.getUserPrincipal().getName();
         Optional<BlogUser> author = blogUserRepository.findByUsername(username);
 
@@ -48,7 +48,6 @@ public class BlogUserController {
 
     @GET
     @Path("{username}/entries")
-    @Transactional
     public List<Entry> getEntriesByUser(String username,
                                         @QueryParam("sort") List<String> sortQuery,
                                         @QueryParam("page") @DefaultValue("0") int pageIndex,
