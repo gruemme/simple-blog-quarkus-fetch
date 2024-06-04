@@ -21,8 +21,7 @@ public class Image {
     private String contentType;
     @Lob
     @Column(nullable = false)
-    @JsonIgnore
-    private byte[] imageContentByte;
+    private byte[] imageContent;
     @OneToOne(mappedBy = "titleImage", optional = false)
     @JsonBackReference
     private Entry entry;
@@ -32,7 +31,7 @@ public class Image {
 
     public Image(String contentType, byte[] imageContent) {
         this.contentType = contentType;
-        this.imageContentByte = imageContent;
+        this.imageContent = imageContent;
     }
 
     public Long getId() {
@@ -43,12 +42,8 @@ public class Image {
         return contentType;
     }
 
-    public byte[] getImageContentByte() {
-        return imageContentByte;
-    }
-
-    public String getImageContent() {
-        return Base64.getEncoder().encodeToString(imageContentByte);
+    public byte[] getImageContent() {
+        return imageContent;
     }
 
     public Entry getEntry() {

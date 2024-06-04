@@ -27,7 +27,7 @@ public class Entry {
     @Column(nullable = false)
     private String title;
     @Lob
-    @Column(nullable = false, length = 32768)
+    @Column(nullable = false)
     private String text;
     @CreationTimestamp
     @Column(updatable = false)
