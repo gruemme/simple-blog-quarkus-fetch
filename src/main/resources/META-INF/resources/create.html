@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Create blog entry</title>
+    <link href="webjars/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<header>
+    <div class="p-5 bg-primary text-center">
+        <h1 id="title">Create blog entry</h1>
+    </div>
+    <hr/>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <div class="container-fluid">
+            <ul class="navbar-nav">
+                <li class="nav-item" id="indexLink">
+                    <a class="nav-link" href="index.html">Blog</a>
+                </li>
+                <li class="nav-item" id="loginLink">
+                    <a class="nav-link" href="login.html">Login</a>
+                </li>
+                <li class="nav-item" id="createLink" hidden>
+                    <a class="nav-link active" href="create.html">Create Entry</a>
+                </li>
+                <li class="nav-item" id="logoutLink">
+                    <a class="nav-link" onclick="logout()">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<main>
+    <div class="container mt-5">
+        <div class="form-group" id="inputData">
+            <div class="row">
+                <div class="col-sm-6 form-label">
+                    <label for="inputTitle">Title:</label>
+                </div>
+                <div class="col-sm-6">
+                    <input class="form-control input-lg" id="inputTitle" type="text"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <label for="inputText">Text:</label>
+                </div>
+                <div class="col-sm-6">
+                    <textarea class="form-control" id="inputText" rows="10"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <label for="inputFile">Image:</label>
+                </div>
+                <div class="col-sm-6">
+                    <input accept="image/*" class="form-control" id="inputFile" type="file"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <label for="inputTags">Tags:</label>
+                </div>
+                <div class="col-sm-6">
+                    <input class="form-control input-lg" id="inputTags" placeholder="Comma separated"
+                           type="text"/>
+                </div>
+            </div>
+            <div>
+                <input class="btn btn-primary" onclick="createEntry()" type="button"
+                       value="Create"/>
+            </div>
+        </div>
+    </div>
+</main>
+<script src="js/nav.js" type="application/javascript"></script>
+<script src="js/create.js" type="application/javascript"></script>
+<script src="webjars/bootstrap/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
