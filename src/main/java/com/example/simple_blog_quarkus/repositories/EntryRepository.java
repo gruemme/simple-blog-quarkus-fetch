@@ -14,7 +14,7 @@ import java.util.List;
 public class EntryRepository implements PanacheRepository<Entry> {
 
     public List<Entry> findByTags_NameOrderByCreatedDesc(String tagName) {
-        return list("tags.name", tagName);
+        return list("SELECT e FROM Entry e JOIN e.tags t WHERE t.name = ?1 ORDER BY e.created DESC", tagName);
     }
 
     public List<Entry> findByAuthor(BlogUser author, Sort sort, Page page) {
