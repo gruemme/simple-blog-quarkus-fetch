@@ -2,7 +2,6 @@ package com.example.simple_blog_quarkus.controller;
 
 import io.quarkus.test.junit.QuarkusTest;
 import jakarta.ws.rs.core.MediaType;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
@@ -13,7 +12,6 @@ import static org.hamcrest.Matchers.hasLength;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 
 @QuarkusTest
-@Disabled // TODO: Fix auto start of test containers
 class EntryControllerTest {
 
     private static final String SIMPLE_ENTRY_REQUEST_BODY = """
